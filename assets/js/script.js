@@ -13,6 +13,7 @@ var formSubmitHandler = function (event) {
 
     if (cityName) {
         getCityData(cityName);
+        createHistory(cityName);
 
         // clear old content
         cityDataContainer.textContent = "";
@@ -64,8 +65,6 @@ var getCityData = function (city) {
 
 var displayCityCurrent = function (data, city) {
     var currContEl = document.querySelector("#current-data-container")
-    console.log(city);
-
     var rawDate = new Date((data.current.dt * 1000))
     var formatOption = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     var formatDate = new Intl.DateTimeFormat('en-US', formatOption).format(rawDate);
@@ -74,7 +73,7 @@ var displayCityCurrent = function (data, city) {
     var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`
 
 
-    var currentTemp = data.current.temp;
+    var currentTemp = data.current.temp
     var currentWind = data.current.wind_speed
     var currentHumidity = data.current.humidity
     var currentUvi = data.current.uvi
@@ -103,8 +102,44 @@ var displayCityCurrent = function (data, city) {
 
 // TODO: Display city forecast information
 // var displayCityForecast = function (data, city) {
-//     var weatherIcon = 
+//     for (let i = 0; i < 4; i++) {
+//         var cardSectionEl = document.querySelector(".card-section")
+//         var dailyEl = document.createElement("div")
+//         dailyEl.className("daily-card")
+
+
+//     }
 // }
+
+// TODO: Create history items as buttons
+var createHistory = function (city) {
+    var buttonList = document.querySelector("#city-buttons");
+    if (buttonList.hasChildNodes()) {
+        for (var i = 0; i < buttonList.children.length; i++) {
+            console.log("children: ", buttonList.children[i].textContent)
+            if (buttonList.children[i].textContent == city) {
+                console.log("already included in history");
+            }
+            else {
+                var cityButton = document.createElement("button")
+                cityButton.className = "btn"
+                cityButton.setAttribute("data-city", city)
+                cityButton.textContent = city;
+                document.querySelector("#city-buttons").appendChild(cityButton);
+                break;
+            }
+        }
+    } else {
+        var cityButton = document.createElement("button")
+        cityButton.className = "btn"
+        cityButton.setAttribute("data-city", city)
+        cityButton.textContent = city;
+        document.querySelector("#city-buttons").appendChild(cityButton);
+    }
+}
+
+
+
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
 cityButtons.addEventListener("click", buttonClickHandler);
