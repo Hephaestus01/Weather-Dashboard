@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header class="header flex-row justify-content-center">
+        <h1 id="page-title">Weather Dashboard</h1>
+    </header>
+
+    <main class="d-flex row justify-space-between">
+        <div class="col-12 col-md-3" id="search-bar">
+            <div class="card">
+                <form id="search-form">
+                    <label for="city-name">Search for a City:</label>
+                    <input name="city-name" id="city-name" type="text" autofocus="true" />
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+            <div class="card" id="city-buttons">
+                <button class="btn" data-city="Austin">Austin</button>
+                <button class="btn" data-city="Chicago">Chicago</button>
+                <button class="btn" data-city="New York">New York</button>
+                <button class="btn" data-city="Orlando">Orlando</button>
+                <button class="btn" data-city="San Francisco">San Franciso</button>
+                <button class="btn" data-city="Seattle">Seattle</button>
+                <button class="btn" data-city="Denver">Denver</button>
+                <button class="btn" data-city="Atlanta">Atlanta</button>
+            </div>
+        </div>
+        <div class="result-areas col-12 col-md-9">
+            <h2>City Data</h2>
+            <div id="current-data-container"></div>
+            <div id="five-day-forecast">
+                <h3>5-Day Forecast</h3>
+                <div class="card-section">Card Section</div>
+            </div>
+        </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
