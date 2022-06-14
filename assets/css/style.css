@@ -2,12 +2,10 @@
     --main-bg-color: #DFF8EB;
     --card-bg-color: #011638;
     --primary-text: #DFF8EB;
-    --secondary-text: #FFC53A;
 }
 
 body {
     background-color: var(--main-bg-color);
-;
 }
 
 /* Header */
@@ -83,6 +81,11 @@ main {
 }
 .uvi-success {
     background-color: green;
+}
+
+.uvi-warning {
+    background-color: yellow;
+    color: black;
 }
 
 .uvi-danger {
