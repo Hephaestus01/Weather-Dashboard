@@ -60,8 +60,6 @@ var getCityData = function (city) {
         })
 };
 
-
-
 var displayCityCurrent = function (data, city) {
     var currContEl = document.querySelector("#current-data-container")
     var rawDate = new Date((data.current.dt * 1000))
@@ -87,7 +85,7 @@ var displayCityCurrent = function (data, city) {
     currContEl.appendChild(currTempEl);
 
     var currWindEl = document.createElement("p")
-    currWindEl.textContent = `Wind: ${currentWind} mph`
+    currWindEl.textContent = `Wind: ${currentWind} MPH`
     currContEl.appendChild(currWindEl);
 
     var currHumEl = document.createElement("p")
@@ -99,25 +97,45 @@ var displayCityCurrent = function (data, city) {
     currContEl.appendChild(currUviEl);
 }
 
-// TODO: Display city forecast information
-var displayCityForecast = function (data, city) {
+// Display city forecast information
+var displayCityForecast = function (data) {
+    var cardSectionEl = document.querySelector(".card-section")
+    cardSectionEl.textContent = "";
+
     for (let i = 0; i < 5; i++) {
 
         var rawDate = new Date((data.daily[i].dt * 1000))
-        var formatOption = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+        var formatOption = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' }
         var formatDate = new Intl.DateTimeFormat('en-US', formatOption).format(rawDate);
 
-        var iconCode = (data.current.weather[0].icon);
-        var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`
-
-        var cardSectionEl = document.querySelector(".card-section")
         var dailyEl = document.createElement("div")
         dailyEl.className = "daily-card card col-12 col-md-2"
 
-        var dailyDateEl = document.createElement("h6");
+        var dailyDateEl = document.createElement("h6")
         dailyDateEl.innerHTML = `${formatDate}`
         dailyEl.appendChild(dailyDateEl);
-        console.log(dailyDateEl)
+
+        var iconCode = (data.daily[i].weather[0].icon)
+        var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`
+        var dailyIconEl = document.createElement("div")
+        dailyIconEl.innerHTML = `<span><img src="${iconUrl}"</img></span>`
+        dailyEl.appendChild(dailyIconEl);
+
+        var dailyTemp = (data.daily[i].temp.day)
+        var dailyTempEl = document.createElement("div")
+        dailyTempEl.textContent = `Temp: ${dailyTemp} \u00B0F`
+        dailyEl.appendChild(dailyTempEl);
+
+        var dailyWind = (data.daily[i].wind_speed)
+        var dailyWindEl = document.createElement("div")
+        dailyWindEl.textContent = `Wind: ${dailyWind} MPH`
+        dailyEl.appendChild(dailyWindEl);
+
+        var dailyHumidity = (data.daily[i].humidity)
+        var dailyHumEl = document.createElement("div")
+        dailyHumEl.textContent = `Humidity: ${dailyHumidity}%`
+        dailyEl.appendChild(dailyHumEl);
+
         cardSectionEl.appendChild(dailyEl);
     }
 }
@@ -129,8 +147,6 @@ var createHistory = function (city) {
         var cityAdd = (cityButtons.children[i].textContent);
         cityArray.push(cityAdd);
     }
-    console.log(cityArray)
-
     if (!cityArray.includes(city)) {
         createButton(city);
     }
@@ -138,7 +154,7 @@ var createHistory = function (city) {
 
 var createButton = function (city) {
     var cityButton = document.createElement("button")
-    cityButton.className = "btn"
+    cityButton.className = "btn btn-secondary"
     cityButton.setAttribute("data-city", city)
     cityButton.textContent = city;
     document.querySelector("#city-buttons").appendChild(cityButton);

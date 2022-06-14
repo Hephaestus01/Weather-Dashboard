@@ -11,22 +11,25 @@
 </head>
 
 <body>
-    <header class="header flex-row justify-content-center">
-        <h1 id="page-title">Weather Dashboard</h1>
+    <header class="header">
+        <h1 id="page-title" class="bg-dark bg-gradient">Weather Dashboard</h1>
     </header>
 
-    <main class="d-flex justify-space-between">
+    <main class="row">
         <div class="col-12 col-md-2" id="search-bar">
-            <div class="card">
+            <div class="card bg-dark bg-gradient">
                 <form id="search-form">
-                    <label for="city-name">Search for a City:</label>
+                    <label for="city-name" class="card-header">Search for a City:</label>
                     <input name="city-name" id="city-name" type="text" autofocus="true" />
-                    <button type="submit" class="btn">Search</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
-            <div class="card" id="city-buttons">
-                <!-- <button class="btn" data-city="Austin">Austin</button>
+            <div class="card">
+                <h4 id="history">History</h4>
+                <div class="card" id="city-buttons">
+                    <!-- <button class="btn" data-city="Austin">Austin</button>
                 <button class="btn" data-city="Portland">Portland</button> -->
+                </div>
             </div>
         </div>
         <div class="result-areas col-12 col-md-10">
