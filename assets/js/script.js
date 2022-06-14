@@ -50,7 +50,7 @@ var getCityData = function (city) {
                                 if (response.ok) {
                                     response.json().then(function (data) {
                                         displayCityCurrent(data, city)
-                                        displayCityForecast(data,city)
+                                        displayCityForecast(data, city)
                                     })
                                 }
                             })
@@ -69,7 +69,6 @@ var displayCityCurrent = function (data, city) {
     var iconCode = (data.current.weather[0].icon);
     var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`
 
-
     var currentTemp = data.current.temp
     var currentWind = data.current.wind_speed
     var currentHumidity = data.current.humidity
@@ -78,7 +77,6 @@ var displayCityCurrent = function (data, city) {
     var cityNameEl = document.createElement("h2")
     cityNameEl.innerHTML = `${city} (${formatDate})<span><img src="${iconUrl}"></img><span>`
     currContEl.appendChild(cityNameEl);
-
 
     var currTempEl = document.createElement("p")
     currTempEl.textContent = `Temperature: ${currentTemp} \u00B0F`
@@ -93,8 +91,18 @@ var displayCityCurrent = function (data, city) {
     currContEl.appendChild(currHumEl);
 
     var currUviEl = document.createElement("p")
-    currUviEl.textContent = `UV Index: ${currentUvi}`
+    currUviEl.innerHTML = `UV Index: <span id="uvi-display">${currentUvi}<span>`
+
     currContEl.appendChild(currUviEl);
+    var uviDisplay = document.querySelector("#uvi-display")
+    console.log(currUviEl, uviDisplay.textContent)
+    if (uviDisplay.textContent > 5) {
+        uviDisplay.className = "uvi-danger"
+    } else if (uviDisplay.textContent < 5 && uviDisplay.textContent > 2) {
+        uviDisplay.className = "uvi-warning"
+    } else {
+        uviDisplay.className = "uvi-success"
+    }
 }
 
 // Display city forecast information
@@ -102,7 +110,7 @@ var displayCityForecast = function (data) {
     var cardSectionEl = document.querySelector(".card-section")
     cardSectionEl.textContent = "";
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
 
         var rawDate = new Date((data.daily[i].dt * 1000))
         var formatOption = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' }

@@ -38,9 +38,15 @@ main {
 
 .card-header {
     color:var(--primary-text);
+    font-size: larger;
+    font-weight: bold;
 }
 
 .btn-primary {
+    margin: 5px;
+}
+
+.btn-secondary {
     margin: 5px;
 }
 
@@ -58,7 +64,7 @@ main {
 }
 
 #current-data-container {
-    height: 240px;
+    height: 50%;
     background-color: var(--card-bg-color);
     color:var(--primary-text);
     padding:10px;
@@ -69,6 +75,18 @@ main {
     margin-top: 20px;
     border-top:5px solid var(--card-bg-color);
     padding: 15px;
+}
+
+#uvi-display {
+    padding: 4px;
+    border-radius: 5px;
+}
+.uvi-success {
+    background-color: green;
+}
+
+.uvi-danger {
+    background-color: red;
 }
 
 .daily-card {
