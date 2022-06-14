@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
 </head>
 
@@ -15,8 +15,8 @@
         <h1 id="page-title">Weather Dashboard</h1>
     </header>
 
-    <main class="d-flex row justify-space-between">
-        <div class="col-12 col-md-3" id="search-bar">
+    <main class="d-flex justify-space-between">
+        <div class="col-12 col-md-2" id="search-bar">
             <div class="card">
                 <form id="search-form">
                     <label for="city-name">Search for a City:</label>
@@ -25,15 +25,15 @@
                 </form>
             </div>
             <div class="card" id="city-buttons">
-                <button class="btn" data-city="Austin">Austin</button>
-
+                <!-- <button class="btn" data-city="Austin">Austin</button>
+                <button class="btn" data-city="Portland">Portland</button> -->
             </div>
         </div>
-        <div class="result-areas col-12 col-md-9">
+        <div class="result-areas col-12 col-md-10">
             <div id="current-data-container"></div>
             <div id="five-day-forecast">
                 <h3>5-Day Forecast</h3>
-                <div class="card-section">Card Section</div>
+                <div class="card-section row d-flex justify-center align-items-center"></div>
             </div>
         </div>
     </main>

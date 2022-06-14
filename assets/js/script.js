@@ -2,7 +2,7 @@ var searchFormEl = document.querySelector("#search-form");
 var cityInputEl = document.querySelector("#city-name");
 var cityDataContainer = document.querySelector("#current-data-container");
 var cityButtons = document.querySelector("#city-buttons");
-var apiKey = "a52564ca373841dba4bd849cb5b4969e";
+var apiKey = "f3f51fab1f0da8e97906dd27ab61f838";
 
 
 // to handle city search submission
@@ -14,10 +14,9 @@ var formSubmitHandler = function (event) {
     if (cityName) {
         getCityData(cityName);
         createHistory(cityName);
-
         // clear old content
         cityDataContainer.textContent = "";
-        searchFormEl.value = "";
+        cityInputEl.value = '';
     } else {
         alert("Please enter a city name");
     }
@@ -51,7 +50,7 @@ var getCityData = function (city) {
                                 if (response.ok) {
                                     response.json().then(function (data) {
                                         displayCityCurrent(data, city)
-                                        // displayCityForecast(data,city)
+                                        displayCityForecast(data,city)
                                     })
                                 }
                             })
@@ -101,45 +100,50 @@ var displayCityCurrent = function (data, city) {
 }
 
 // TODO: Display city forecast information
-// var displayCityForecast = function (data, city) {
-//     for (let i = 0; i < 4; i++) {
-//         var cardSectionEl = document.querySelector(".card-section")
-//         var dailyEl = document.createElement("div")
-//         dailyEl.className("daily-card")
+var displayCityForecast = function (data, city) {
+    for (let i = 0; i < 5; i++) {
 
+        var rawDate = new Date((data.daily[i].dt * 1000))
+        var formatOption = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+        var formatDate = new Intl.DateTimeFormat('en-US', formatOption).format(rawDate);
 
-//     }
-// }
+        var iconCode = (data.current.weather[0].icon);
+        var iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`
 
-// TODO: Create history items as buttons
-var createHistory = function (city) {
-    var buttonList = document.querySelector("#city-buttons");
-    if (buttonList.hasChildNodes()) {
-        for (var i = 0; i < buttonList.children.length; i++) {
-            console.log("children: ", buttonList.children[i].textContent)
-            if (buttonList.children[i].textContent == city) {
-                console.log("already included in history");
-            }
-            else {
-                var cityButton = document.createElement("button")
-                cityButton.className = "btn"
-                cityButton.setAttribute("data-city", city)
-                cityButton.textContent = city;
-                document.querySelector("#city-buttons").appendChild(cityButton);
-                break;
-            }
-        }
-    } else {
-        var cityButton = document.createElement("button")
-        cityButton.className = "btn"
-        cityButton.setAttribute("data-city", city)
-        cityButton.textContent = city;
-        document.querySelector("#city-buttons").appendChild(cityButton);
+        var cardSectionEl = document.querySelector(".card-section")
+        var dailyEl = document.createElement("div")
+        dailyEl.className = "daily-card card col-12 col-md-2"
+
+        var dailyDateEl = document.createElement("h6");
+        dailyDateEl.innerHTML = `${formatDate}`
+        dailyEl.appendChild(dailyDateEl);
+        console.log(dailyDateEl)
+        cardSectionEl.appendChild(dailyEl);
     }
 }
 
+//Create history items as buttons
+var createHistory = function (city) {
+    cityArray = []
+    for (var i = 0; i < cityButtons.children.length; i++) {
+        var cityAdd = (cityButtons.children[i].textContent);
+        cityArray.push(cityAdd);
+    }
+    console.log(cityArray)
+
+    if (!cityArray.includes(city)) {
+        createButton(city);
+    }
+}
+
+var createButton = function (city) {
+    var cityButton = document.createElement("button")
+    cityButton.className = "btn"
+    cityButton.setAttribute("data-city", city)
+    cityButton.textContent = city;
+    document.querySelector("#city-buttons").appendChild(cityButton);
+}
 
 
-
-searchFormEl.addEventListener("submit", formSubmitHandler);
-cityButtons.addEventListener("click", buttonClickHandler);
+searchFormEl.addEventListener("submit", formSubmitHandler)
+cityButtons.addEventListener("click", buttonClickHandler)
