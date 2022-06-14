@@ -2,7 +2,7 @@ var searchFormEl = document.querySelector("#search-form");
 var cityInputEl = document.querySelector("#city-name");
 var cityDataContainer = document.querySelector("#current-data-container");
 var cityButtons = document.querySelector("#city-buttons");
-var apiKey = "f3f51fab1f0da8e97906dd27ab61f838";
+var apiKey = "db0954743f17bba3e12033c19f3cab1f";
 
 
 // to handle city search submission
