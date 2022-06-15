@@ -6,6 +6,7 @@
 
 body {
     background-color: var(--main-bg-color);
+    margin:0 auto;
 }
 
 /* Header */
@@ -23,6 +24,11 @@ main {
 }
 
 /* Search Containers */
+#search-bar {
+    display:flex;
+    flex-direction: column;
+}
+
 #search-form {
     display:flex;
     flex-direction: column;
@@ -32,6 +38,7 @@ main {
 
 .card {
     margin-bottom: 10px;
+    padding: 8px;
 }
 
 .card-header {

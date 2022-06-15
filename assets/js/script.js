@@ -1,3 +1,4 @@
+// global variables
 var searchFormEl = document.querySelector("#search-form");
 var cityInputEl = document.querySelector("#city-name");
 var cityDataContainer = document.querySelector("#current-data-container");
@@ -13,7 +14,6 @@ var formSubmitHandler = function (event) {
 
     if (cityName) {
         getCityData(cityName);
-        createHistory(cityName);
         // clear old content
         cityDataContainer.textContent = "";
         cityInputEl.value = '';
@@ -43,19 +43,23 @@ var getCityData = function (city) {
                 response.json().then(function (data) {
                     var cityLon = data.coord.lon;
                     var cityLat = data.coord.lat;
+                    var cityProper = data.name;
+                    createHistory(cityProper);
                     if (apiUrl_1) {
                         var apiUrl_2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&units=imperial&appid=${apiKey}`
                         fetch(apiUrl_2)
                             .then(function (response) {
                                 if (response.ok) {
                                     response.json().then(function (data) {
-                                        displayCityCurrent(data, city)
-                                        displayCityForecast(data, city)
+                                        displayCityCurrent(data, cityProper)
+                                        displayCityForecast(data, cityProper)
                                     })
                                 }
                             })
                     }
                 })
+            } else {
+                alert("Please enter a valid city name or zip code")
             }
         })
 };

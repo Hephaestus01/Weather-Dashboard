@@ -1,1 +1,6 @@
-# cbc_challenge-6
+# Weather Dashboard
+
+Deployed URL:
+
+GitHub Repository:
+
