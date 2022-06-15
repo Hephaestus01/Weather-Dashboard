@@ -56,6 +56,9 @@ var getCityData = function (city) {
                                     })
                                 }
                             })
+                        if (cityProper = "Macon") {
+                            alert("Hey, that's my hometown! Hey Mom and Dad! ❤️❤️❤️")
+                        }
                     }
                 })
             } else {
