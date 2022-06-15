@@ -56,9 +56,6 @@ var getCityData = function (city) {
                                     })
                                 }
                             })
-                        if (cityProper = "Macon") {
-                            alert("Hey, that's my hometown! Hey Mom and Dad! ❤️❤️❤️")
-                        }
                     }
                 })
             } else {
@@ -157,6 +154,9 @@ var displayCityForecast = function (data) {
 
 //Create history items as buttons
 var createHistory = function (city) {
+    if (city == "Macon") {
+        alert("Hey, that's my hometown! Hey Mom and Dad! ❤️❤️❤️")
+    }
     cityArray = []
     for (var i = 0; i < cityButtons.children.length; i++) {
         var cityAdd = (cityButtons.children[i].textContent);
