@@ -99,7 +99,6 @@ var displayCityCurrent = function (data, city) {
 
     currContEl.appendChild(currUviEl);
     var uviDisplay = document.querySelector("#uvi-display")
-    console.log(currUviEl, uviDisplay.textContent)
     if (uviDisplay.textContent > 5) {
         uviDisplay.className = "uvi-danger"
     } else if (uviDisplay.textContent < 5 && uviDisplay.textContent > 2) {
@@ -152,19 +151,43 @@ var displayCityForecast = function (data) {
     }
 }
 
+var loadPage = function () {
+    if (localStorage.getItem("cities")) {
+        var cityArray = JSON.parse(localStorage.getItem("cities"))
+        for (var i = 0; i < cityArray.length; i++) {
+            if (cityArray[i] != null) {
+                createButton(cityArray[i]);
+            }
+        }
+    } else {
+        cityArray = []
+    }
+    return cityArray
+}
+
+
 //Create history items as buttons
 var createHistory = function (city) {
+
+    // easter egg :-)
     if (city == "Macon") {
         alert("Hey, that's my hometown! Hey Mom and Dad! ❤️❤️❤️")
     }
-    cityArray = []
-    for (var i = 0; i < cityButtons.children.length; i++) {
-        var cityAdd = (cityButtons.children[i].textContent);
-        cityArray.push(cityAdd);
+    var removeEls = document.querySelector("#city-buttons")
+    while (removeEls.firstChild) {
+        removeEls.removeChild(removeEls.firstChild)
     }
-    if (!cityArray.includes(city)) {
+
+    var cityArray = loadPage(cityArray);
+    console.log(cityArray)
+
+    if (!cityArray.includes(city) && city) {
         createButton(city);
+        cityArray.push(city)
     }
+    console.log(cityArray)
+    localStorage.setItem("cities", JSON.stringify(cityArray))
+
 }
 
 var createButton = function (city) {
@@ -178,3 +201,5 @@ var createButton = function (city) {
 
 searchFormEl.addEventListener("submit", formSubmitHandler)
 cityButtons.addEventListener("click", buttonClickHandler)
+
+loadPage();
